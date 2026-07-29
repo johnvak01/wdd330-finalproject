@@ -102,10 +102,10 @@ footer{
     border-top: 1px solid var(--dark);
 }
 
-.navbar a {
-    color: #fff;
-}
-
-.main {
-    padding: 2rem 0;
+.content-box{
+    border-radius: 0.25rem;
+    border: 1px solid var(--dark);
+    width: 100%;
+    margin-bottom: 0.25rem;
+    background-color: var(--light);
 }
