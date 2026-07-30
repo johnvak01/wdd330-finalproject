@@ -109,3 +109,99 @@ footer{
     margin-bottom: 0.25rem;
     background-color: var(--light);
 }
+
+.media-list{
+    display: grid;
+    grid-template-columns: 2rem 1fr 2rem;
+    /* grid-template-rows: repeat(auto-fill, 200px); */
+}
+.media-nav-l{
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+    justify-content: center;
+    align-content: center;
+
+}
+.media-nav-r{
+    grid-column: -2 / -1;
+    grid-row: 1 / -1;
+    justify-content: center;
+    align-content: center;
+}
+
+.media-nav-l:hover,.media-nav-r:hover{
+    background-color: var(--accent-2);
+    color: var(--light);
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.media-nav-l:active,.media-nav-r:active{
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 0.25rem;
+}
+
+.media-boxes{
+    grid-column: 2 / -2;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-content: center;
+}
+
+.media-box{
+    border: 1px solid var(--accent-2);
+    padding: 0.25rem;
+    margin: 0.25rem;
+    border-radius: 0.25rem;
+    display: grid;
+    grid-template-columns: 15% 60% 15%;
+    align-items: center;
+    justify-content: center;
+}
+.media-image, .media-description, .media-duration{
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    grid-column: 1 / -1;
+}
+
+.remove{
+    border: 3px solid var(--accent-1);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: auto;
+    margin: auto;
+}
+
+.add{
+    border: 3px solid var(--accent-2);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: auto;
+    margin: auto;
+}
+
+.remove:hover{
+    background-color: var(--accent-1);
+    color: var(--light);
+    cursor: pointer;
+}
+.add:hover{
+    background-color: var(--accent-2);
+    color: var(--light);
+    cursor: pointer;
+}
+.remove:active{
+    background-color: var(--dark);
+    color: var(--light);
+}
+.add:active{
+    background-color: var(--dark);
+    color: var(--light);
+}   
+
