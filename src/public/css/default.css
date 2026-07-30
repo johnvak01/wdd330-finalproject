@@ -3,7 +3,7 @@
     --light: #ffffff;
     /* --light: #808080; */
     --dark: #000000;
-    --beige: #EAEC83;
+    --beige: #f5f7b1;
     --accent-1: #CC0000;
     --accent-2: #006000;
 
@@ -205,3 +205,26 @@ footer{
     color: var(--light);
 }   
 
+input[type="text"], input[type="password"], input[type="email"], textarea {
+    width: 60%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border: 1px solid var(--dark);
+    border-radius: 0.25rem;
+}
+button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 3px solid var(--accent-2);
+    border-radius: 0.25rem;
+    background-color: var(--light);
+    cursor: pointer;
+}
+button:hover {
+    background-color: var(--accent-2);
+    color: var(--light);
+}
+button:active{
+    background-color: var(--dark);
+    color: var(--light);
+}
