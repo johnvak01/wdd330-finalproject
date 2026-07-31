@@ -161,6 +161,12 @@ footer{
     align-items: center;
     justify-content: center;
 }
+.content-box-title, .content-box-subtitle{
+    grid-column: 1 / -1;
+    text-align: left;
+    padding: 1rem 0.25rem;
+
+}
 .media-image, .media-description, .media-duration{
     width: 100%;
     height: auto;
