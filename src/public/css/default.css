@@ -354,7 +354,7 @@ button:active {
     width: 100%;
 }
 .itinerary-buttons button{
-    width: 25%;
+    width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
