@@ -2,9 +2,10 @@
 :root {
     --light: #ffffff;
     /* --light: #808080; */
+    --midtone: #e0e0e0;
     --dark: #000000;
     --beige: #f5f7b1;
-    --accent-1: #CC0000;
+    --accent-1: #af0000;
     --accent-2: #006000;
 
     --font-base: 18px;
@@ -75,6 +76,7 @@ header {
     display: grid;
     grid-template-columns: 64px 200px 1fr 1fr;
     border-bottom: 1px solid var(--dark);
+
     nav {
         grid-column: -2/-1;
 
@@ -98,11 +100,12 @@ header {
     }
 
 }
-footer{
+
+footer {
     border-top: 1px solid var(--dark);
 }
 
-.content-box{
+.content-box {
     border-radius: 0.25rem;
     border: 1px solid var(--dark);
     width: 100%;
@@ -110,48 +113,52 @@ footer{
     background-color: var(--light);
 }
 
-.media-list{
+.media-list {
     display: grid;
     grid-template-columns: 2rem 1fr 2rem;
     /* grid-template-rows: repeat(auto-fill, 200px); */
 }
-.media-nav-l{
+
+.media-nav-l {
     grid-column: 1 / 2;
     grid-row: 1 / -1;
     justify-content: center;
     align-content: center;
 
 }
-.media-nav-r{
+
+.media-nav-r {
     grid-column: -2 / -1;
     grid-row: 1 / -1;
     justify-content: center;
     align-content: center;
 }
 
-.media-nav-l:hover,.media-nav-r:hover{
+.media-nav-l:hover,
+.media-nav-r:hover {
     background-color: var(--accent-2);
     color: var(--light);
     border-radius: 0.25rem;
     cursor: pointer;
 }
 
-.media-nav-l:active,.media-nav-r:active{
+.media-nav-l:active,
+.media-nav-r:active {
     background-color: var(--dark);
     color: var(--light);
     border-radius: 0.25rem;
 }
 
-.media-boxes{
+.media-boxes {
     grid-column: 2 / -2;
-    grid-row: 1 / -1;
+    grid-row: 2 / -1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     align-content: center;
 }
 
-.media-box{
+.media-box {
     border: 1px solid var(--accent-2);
     padding: 0.25rem;
     margin: 0.25rem;
@@ -161,76 +168,79 @@ footer{
     align-items: center;
     justify-content: center;
 }
-.media-box-placeholder{
-    
-        border: 1px dashed var(--accent-2);
-        padding: 0.25rem;
-        margin: 0.25rem;
-        border-radius: 0.25rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background-color: var(--beige);
-}
-.content-box-title, .content-box-subtitle{
-    grid-column: 1 / -1;
-    text-align: left;
-    padding: 1rem 0.25rem;
 
+.placeholder {
+
+    border: 1px dashed var(--accent-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--beige);
+    color: var(--accent-2);
 }
-.media-image, .media-description, .media-duration{
+
+.media-image,
+.media-description,
+.media-duration {
     width: 100%;
     height: auto;
     border-radius: 0.25rem;
     grid-column: 1 / -1;
 }
 
-.remove{
+.remove {
     border: 3px solid var(--accent-1);
-    border-radius: 50%;
+    border-radius: 25%;
     width: 2rem;
     height: 2rem;
     padding: auto;
     margin: auto;
 }
 
-.add{
+.add {
     border: 3px solid var(--accent-2);
-    border-radius: 50%;
+    border-radius: 25%;
     width: 2rem;
     height: 2rem;
     padding: auto;
     margin: auto;
 }
 
-.remove:hover{
+.remove:hover {
     background-color: var(--accent-1);
     color: var(--light);
     cursor: pointer;
 }
-.add:hover{
+
+.add:hover {
     background-color: var(--accent-2);
     color: var(--light);
     cursor: pointer;
 }
-.remove:active{
+
+.remove:active {
     background-color: var(--dark);
     color: var(--light);
 }
-.add:active{
+
+.add:active {
     background-color: var(--dark);
     color: var(--light);
-}   
+}
 
-input[type="text"], input[type="password"], input[type="email"], textarea {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
     width: 60%;
     padding: 0.5rem;
     margin: 0.5rem;
     border: 1px solid var(--dark);
     border-radius: 0.25rem;
 }
+
 button {
     padding: 0.5rem 1rem;
     margin: 0.5rem;
@@ -239,25 +249,31 @@ button {
     background-color: var(--light);
     cursor: pointer;
 }
+
 button:hover {
     background-color: var(--accent-2);
     color: var(--light);
 }
-button:active{
+
+button:active {
     background-color: var(--dark);
     color: var(--light);
 }
-.itinerary-box{
-    display: flex;
-    flex-direction: row;
+
+.itinerary-box {
+    display: grid;
+    grid-template-columns: 6rem 1fr 6rem;
     justify-content: center;
     padding: 0.25rem;
 }
-.itinerary-start, .itinerary-end{
+
+.itinerary-start,
+.itinerary-end {
     width: 6rem;
     padding: 0.25rem;
 }
-.itinerary-line{
+
+.itinerary-line {
     border: 1px dashed var(--dark);
     border-radius: 0.25rem;
     padding: 0.25rem;
@@ -266,29 +282,80 @@ button:active{
     grid-template-columns: 25% 25% 25% 12.5% 12.5%;
     justify-content: space-evenly;
 }
-.itinerary-section{
+
+.itinerary-section {
     border-radius: 0.25rem;
     width: 100%;
+    padding: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.i-empty{
+.i-empty {
     border: 1px dashed var(--dark);
 }
-.i-break{
+
+.i-break {
     background-color: var(--beige);
 }
 
-.i-filled{
+.i-filled {
     background-color: var(--accent-2);
     color: var(--light);
 }
-.i-remainder{
+
+.i-remainder {
     background-color: var(--dark);
     color: var(--light);
     border-radius: 0.25rem 0 0 0.25rem;
 }
-.i-excess{
+
+.i-excess {
     background-color: var(--accent-1);
     border-radius: 0 0.25rem 0.25rem 0;
+    color: var(--light);
 }
 
+.itinerary-list {
+    grid-column: 1 / -1;
+    text-align: center;
+    list-style-position: inside;
+    border-top: 1px solid var(--dark);
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.itinerary-list li {
+    list-style-type: none;
+    border: 1px solid var(--dark);
+    margin: 0.25rem;
+}
+
+.itinerary-list li:hover {
+    background-color: var(--midtone);
+    transform: translateY(-2px);
+
+    cursor: pointer;
+    filter: drop-shadow(2px 0.25rem 0 var(--dark));
+    /* transition: transform 3s forward; */
+    /* transition: filter 0.6s forward; */
+}
+.itinerary-list li:active {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.itinerary-buttons{
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.itinerary-buttons button{
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

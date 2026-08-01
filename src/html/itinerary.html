@@ -23,20 +23,34 @@
         <div class="content-box itinerary-box">
             <div class="itinerary-start">HH:MM</div>
             <div class="itinerary-line">
-                <span class="itinerary-section i-empty">a</span>
-                <span class="itinerary-section i-break">a</span>
-                <span class="itinerary-section i-filled">a</span>
-                <span class="itinerary-section i-remainder">a</span>
-                <span class="itinerary-section i-excess">a</span>
+                <span class="itinerary-section i-empty">Spirited Away</span>
+                <span class="itinerary-section i-break">The Ballad of Buster Scraggs</span>
+                <span class="itinerary-section i-filled placeholder">Alien</span>
+                <span class="itinerary-section i-remainder">True Grit</span>
+                <span class="itinerary-section i-excess">True Grit</span>
             </div>
             <div class="itinerary-end">HH:MM</div>
+            <div class="itinerary-list">
+                <h2>Itinerary Order</h2>
+                <ul>
+                    <li>Spirited Away</li>
+                    <li>True Grit</li>
+                    <li>The Ballad of Buster Scraggs</li>
+                    <li>Alien</li>
+                    <li class="placeholder">a</li>
+                </ul>
+            </div>
+            <div class="itinerary-buttons">
+                <button type="button" class="add">Add Break</button>
+                <button type="button" class="remove">Remove Break</button>
+                <button type="button" class="add">Adjust Time</button>
+            </div>
         </div>
-
+        <div class="content-box">
+            <h1>Add From Wishlist</h1>
+        </div>
         <div class="content-box media-list">
-            <h2 class="content-box-title">Wishlist</h2>
-            <h3 class="content-box-subtitle">Add media to your itinerary</h3>
             <div class="media-nav-l">&lt;</div>
-
             <div class="media-nav-r">&gt;</div>
             <div class="media-boxes">
                 <div class="media-box">
@@ -47,7 +61,40 @@
                     <p class="media-description">This is a sample boilerplate HTML page.</p>
                     <p class="media-duration">HH:MM:SS</p>
                 </div>
-                <div class="media-box media-box-placeholder"><span>placeholder</span></div>
+                <div class="media-box media-box-placeholder placeholder"><span>placeholder</span></div>
+                <div class="media-box">
+                    <div class="wishlist-modify add">+</div>
+                    <h1 class="media-title">Box 1</h1>
+                    <div class="itinerary-modify remove">-</div>
+                    <img src="../images/sample.jpg" alt="Sample Image" class="media-image">
+                    <p class="media-description">This is a sample boilerplate HTML page.</p>
+                    <p class="media-duration">HH:MM:SS</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-box">
+            <h1>Search</h1>
+        </div>
+        <div class="content-box search">
+            <form action="#" method="get">
+                <label for="search">Search:</label>
+                <input type="text" name="search" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="content-box media-list">
+            <div class="media-nav-l">&lt;</div>
+            <div class="media-nav-r">&gt;</div>
+            <div class="media-boxes">
+                <div class="media-box">
+                    <div class="wishlist-modify add">+</div>
+                    <h1 class="media-title">Box 1</h1>
+                    <div class="itinerary-modify remove">-</div>
+                    <img src="../images/sample.jpg" alt="Sample Image" class="media-image">
+                    <p class="media-description">This is a sample boilerplate HTML page.</p>
+                    <p class="media-duration">HH:MM:SS</p>
+                </div>
+                <div class="media-box media-box-placeholder placeholder"><span>placeholder</span></div>
                 <div class="media-box">
                     <div class="wishlist-modify add">+</div>
                     <h1 class="media-title">Box 1</h1>
