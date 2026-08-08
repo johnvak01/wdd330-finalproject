@@ -25,24 +25,53 @@ export async function loadHeaderFooter() {
 
 
 
+
 export class ExternalService {
   constructor(url) {
     this.url = url;
   }
-  #convertToJson(res) {
+  async #convertToJson(res) {
     let result = res.json();
-    console.log(result);
     if (res.ok) {
       return result;
     } else {
       throw { message: "Bad Response", status: res.status, statusText: result };
     };
   }
-  async getData(URLextension = "", queryParams = "") {
-    const response = await fetch(`${this.url + extension + queryParams}`);
-    const data = await this.#convertToJson(response);
+  async getData(methodType = "GET", URLextension = "", queryParams = "", header = {}) {
+    const options = {
+      method: methodType,
+      headers: header
+    };
+    const finalURL = this.url + URLextension + queryParams;
+    let response = await fetch(finalURL, options)
+    let data = await this.#convertToJson(response);
 
-    return data.Result
-  }
-  
+    // console.log("response", response);
+    // console.log("data", data);
+    return data;
+    // response.then(res => res.json())
+    //   .then(res => console.log("response", res))
+    //   .then(data => {return data})
+    //   .catch(err => console.error(err.message));
+    // const data = await this.#convertToJson(response);
+
+    // return data.Result
+
+  };
+}
+
+export async function getSha1Hash(message) {
+  // Encode string as UTF-8 Uint8Array
+  const msgBuffer = new TextEncoder().encode(message);                    
+
+  // Hash the message
+  const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
+
+  // Convert ArrayBuffer to Array
+  const hashArray = Array.from(new Uint8Array(hashBuffer));              
+
+  // Convert bytes to hex string
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
 }
