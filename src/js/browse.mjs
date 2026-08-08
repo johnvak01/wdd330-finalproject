@@ -10,7 +10,8 @@ console.log("stored results:", storedResults);
 const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 
-searchButton.addEventListener("click", async () => {
+searchButton.addEventListener("click", async (event) => {
+    event.preventDefault();
     const query = searchInput.value.trim();
     if (query) {
         let searchResults = await getAPISearchResults(query);
