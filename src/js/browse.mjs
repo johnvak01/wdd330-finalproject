@@ -1,3 +1,4 @@
 import { getAPISearchResults } from "./search.mjs";
 
-getAPISearchResults("dog");
+let searchResults = await getAPISearchResults("dog");
+console.log(searchResults);

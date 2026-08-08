@@ -7,10 +7,11 @@ console.log(getMovieDetails(200))
 console.log(getPodcastDetails(2000))
 
 export async function getAPISearchResults(query) {
+    console.log("searching for", query);
     let results = [];
     // movies
     let movieResults = await searchMovies(query);
-    console.log("movies", movieResults.results);
+    // console.log("movies", movieResults.results);
     for (let movie of movieResults.results) {
         let movieDetails = await getMovieDetails(movie.id);
         let newMovie = {
@@ -24,19 +25,19 @@ export async function getAPISearchResults(query) {
             genres: movieDetails.genres.map(genre => genre.name).join(", ")
         };
         results.push(newMovie);
-        console.log(newMovie);
+        // console.log(newMovie);
     }
     // podcasts
     let podcastResults = await searchPodcasts(query);
-    console.log("podcasts", podcastResults.feeds);
+    // console.log("podcasts", podcastResults.feeds);
     for(let podcast of podcastResults.feeds) {
         let podcastFeed = await getPodcastFeed(podcast.id);
-        console.log("podcast feed", podcastFeed);
+        // console.log("podcast feed", podcastFeed);
         // let podcastDetails = await getPodcastDetails(podcastfeed.items[0].id);
         // console.log("podcast details", podcastDetails);
         let date = new Date(podcastFeed.items[0].datePublished * 1000); 
         let newPodcast = {
-            
+            type: "podcast", 
             title: podcast.title,
             posterPath: podcast.image,
             runtime: podcastFeed.items[0].duration, //in seconds
@@ -46,6 +47,7 @@ export async function getAPISearchResults(query) {
             genres: Object.values(podcast.categories).join(", ")
         };
         results.push(newPodcast);
-        console.log(newPodcast);
+        // console.log(newPodcast);
     }
+    return results;
 }

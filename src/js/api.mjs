@@ -87,7 +87,7 @@ export async function searchMovies(term) {
             accept: 'application/json',
             Authorization: `Bearer ${tmdb_auth}`
         });
-    console.log(movieData)
+    // console.log(movieData)
     return movieData;
 }
 
