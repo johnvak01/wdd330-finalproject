@@ -1,4 +1,8 @@
 
+function updateResultsPage(contentBox, searchResults) {
+}
+
+
 function createMediaBoxContents(card, media) {
   const cardContents = document.createElement('div');
   cardContents.classList.add('card-contents');

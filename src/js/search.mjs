@@ -40,7 +40,7 @@ export async function getAPISearchResults(query) {
             type: "podcast", 
             title: podcast.title,
             posterPath: podcast.image,
-            runtime: podcastFeed.items[0].duration, //in seconds
+            runtime: Math.ceil(podcastFeed.items[0].duration/60), //converted from seconds to minutes
             description: podcastFeed.items[0].description,
             releaseDate: date.toISOString().split('T')[0], // format as YYYY-MM-DD
             producers: podcast.author,

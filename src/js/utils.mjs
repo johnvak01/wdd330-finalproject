@@ -23,9 +23,6 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-
-
-
 export class ExternalService {
   constructor(url) {
     this.url = url;
