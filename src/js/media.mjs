@@ -120,7 +120,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     el_genres.textContent = genres || "unknown";
     el_genres.classList.add('media-genres');
 
-    mediaBox.append(w_add, w_remove, el_title, el_description, el_poster_path, el_runtime, el_release_date, el_producers, el_genres);
+    mediaBox.append(w_add, w_remove, el_title, el_runtime, el_description, el_poster_path, el_release_date, el_producers, el_genres);
 
     return mediaBox;
 }
