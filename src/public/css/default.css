@@ -190,7 +190,7 @@ footer {
 
 .media-image,
 .media-description,
-.media-duration {
+.media-duration, .media-producers,.media-genres, .media-release-date{
     width: 100%;
     max-width: 100%;
     height: auto;

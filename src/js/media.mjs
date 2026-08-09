@@ -1,8 +1,5 @@
 import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 
-
-
-
 export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPage = 3, draggable = false) {
     contentBox.innerHTML = "";
     let totalboxes = 0;
@@ -10,7 +7,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
     mediaList.forEach((media) => {
         // make the Box
         const mediaBox = createMediaBox(media.id, media.type, media.title, media.description, media.posterPath, media.runtime, media.releaseDate, media.producers, media.genres);
-        //deisplay the box if in range 
+        //deisplay box if in range 
         totalboxes++;
         console.log("page", page, "resultsPerPage", resultsPerPage, "totalboxes", totalboxes);
         if (totalboxes <= resultsPerPage * (page + 1) && totalboxes > resultsPerPage * page) {
@@ -18,7 +15,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
             mediaBox.classList.remove('undisplayed');
             displayedboxes++;
         }
-        //make draggable of toggled to yes
+        //make draggable if toggled to yes
         if (draggable) { 
             const handle = mediaBox.querySelector('.media-handle')
             handle.classList.remove('undisplayed');
@@ -32,6 +29,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
         // append box
         contentBox.appendChild(mediaBox);
     });
+    // fill in empty boxes if not enough results to fill page
     while (displayedboxes < resultsPerPage) {
         const placeholderBox = CreateEmptyMediaBox("No more results");
         contentBox.appendChild(placeholderBox);
@@ -39,7 +37,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
         console.log("+")
 
     }
-    // update pagination
+    // return total number of boxes for pagination
     return totalboxes;
 }
 
@@ -135,7 +133,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     el_genres.textContent = genres || "unknown";
     el_genres.classList.add('media-genres');
 
-    mediaBox.append(w_add, w_remove, el_title, el_handle, el_runtime, el_description, el_poster_path, el_release_date, el_producers, el_genres);
+    mediaBox.append(w_add, w_remove, el_title, el_handle, el_runtime, el_description, el_poster_path,el_genres, el_producers, el_release_date);
 
     return mediaBox;
 }

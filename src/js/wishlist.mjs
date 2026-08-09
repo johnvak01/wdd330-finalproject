@@ -34,6 +34,7 @@ wishlist_nav_l.addEventListener("click", (event) => {
     if (page > 0) {
         page--;
         result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, true);
+        setDraggable(document.querySelectorAll('.media-box'));
     }
     if (page > 0) {
         wishlist_nav_l.classList.remove("hidden");
@@ -53,6 +54,7 @@ wishlist_nav_r.addEventListener("click", (event) => {
     if (result_total > resultsPerPage * (page + 1)) {
         page++;
         result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, true);
+        setDraggable(document.querySelectorAll('.media-box'));
     }
     if (page > 0) {
         wishlist_nav_l.classList.remove("hidden");
@@ -70,37 +72,43 @@ wishlist_nav_r.addEventListener("click", (event) => {
 // draggable js
 
 const draggables = document.querySelectorAll('.media-box');
+setDraggable(draggables);
+
 const container = document.querySelector('.media-boxes');
 
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging');
-    });
-    draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging');
-
-        let newWishlistOrder = [];
-        const updatedDraggables = document.querySelectorAll('.media-box');
-        updatedDraggables.forEach(draggable => {
-            const id = draggable.dataset.id;
-            const type = draggable.dataset.type;
-            newWishlistOrder.push(`${id}-${type}`);
+function setDraggable(draggables) {
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+            console.log(draggable, "dragging");
         });
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
 
-        console.log("newWishlistOrder", newWishlistOrder);
-        const orderMap = new Map(newWishlistOrder.map((id, index) => [id, index]));
+            let newWishlistOrder = [];
+            const updatedDraggables = document.querySelectorAll('.media-box');
+            updatedDraggables.forEach(draggable => {
+                const id = draggable.dataset.id;
+                const type = draggable.dataset.type;
+                newWishlistOrder.push(`${id}-${type}`);
+            });
 
-        storedWishlist = storedWishlist.sort((a, b) => {
-            const indexA = orderMap.has(`${a.id}-${a.type}`) ? orderMap.get(`${a.id}-${a.type}`) : targetOrder.length;
-            const indexB = orderMap.has(`${b.id}-${b.type}`) ? orderMap.get(`${b.id}-${b.type}`) : targetOrder.length;
-            return indexA - indexB;
+            console.log("newWishlistOrder", newWishlistOrder);
+            const orderMap = new Map(newWishlistOrder.map((id, index) => [id, index]));
 
-        }
-        );
-        console.log("storedWishlist", storedWishlist);
-        setLocalStorage("wishlist", storedWishlist);
+            storedWishlist = storedWishlist.sort((a, b) => {
+                const indexA = orderMap.has(`${a.id}-${a.type}`) ? orderMap.get(`${a.id}-${a.type}`) : targetOrder.length;
+                const indexB = orderMap.has(`${b.id}-${b.type}`) ? orderMap.get(`${b.id}-${b.type}`) : targetOrder.length;
+                return indexA - indexB;
+
+            }
+            );
+            console.log("storedWishlist", storedWishlist);
+            setLocalStorage("wishlist", storedWishlist);
+        });
     });
-});
+}
+
 container.addEventListener('dragover', e => {
     e.preventDefault();
     // const afterElement = getDragAfterElement(container, e.clientY);
