@@ -359,3 +359,7 @@ button:active {
     align-items: center;
     justify-content: center;
 }
+
+.undisplayed{
+    display: none;
+}

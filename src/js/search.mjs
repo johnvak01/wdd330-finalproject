@@ -15,6 +15,7 @@ export async function getAPISearchResults(query) {
     for (let movie of movieResults.results) {
         let movieDetails = await getMovieDetails(movie.id);
         let newMovie = {
+            id: movie.id,
             type: "movie",
             title: movie.title,
             posterPath: movie.poster_path,
@@ -37,6 +38,7 @@ export async function getAPISearchResults(query) {
         // console.log("podcast details", podcastDetails);
         let date = new Date(podcastFeed.items[0].datePublished * 1000); 
         let newPodcast = {
+            id: podcastFeed.items[0].id,
             type: "podcast", 
             title: podcast.title,
             posterPath: podcast.image,
