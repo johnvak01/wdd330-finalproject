@@ -1,6 +1,7 @@
 import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 import { updateResultsPage } from "./media.mjs";
 import { getAPISearchResults } from "./search.mjs";
+import { TimeLine } from "./timeline.mjs";
 
 
 // Wishlist Update
@@ -9,7 +10,7 @@ let storedWishlist = getLocalStorage("wishlist");
 let page = 0;
 const resultsPerPage = 3;
 let contentBox = document.getElementById("wishlist-boxes");
-let result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false);
+let result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false, true);
 // wishlist Pagination
 const wishlist_nav_l = document.getElementById("wishlist-nav-l");
 const wishlist_nav_r = document.getElementById("wishlist-nav-r");
@@ -33,7 +34,7 @@ wishlist_nav_l.addEventListener("click", (event) => {
     event.preventDefault();
     if (page > 0) {
         page--;
-        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false);
+        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false,true);
         setDraggable(document.querySelectorAll('.media-box'));
     }
     if (page > 0) {
@@ -53,7 +54,7 @@ wishlist_nav_r.addEventListener("click", (event) => {
     event.preventDefault();
     if (result_total > resultsPerPage * (page + 1)) {
         page++;
-        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false);
+        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage, false,true);
         setDraggable(document.querySelectorAll('.media-box'));
     }
     if (page > 0) {
@@ -74,7 +75,7 @@ console.log("stored results:", storedResults);
 
 
 let contentBoxSearch = document.getElementById("search-results");
-let searchResultTotal = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage);
+let searchResultTotal = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage, false, true);
 // pagination
 
 const search_nav_l = document.getElementById("search-nav-l");
@@ -100,7 +101,7 @@ search_nav_l.addEventListener("click", (event) => {
     if (page > 0) {
         page--;
         console.log("prior page", page);
-        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage);
+        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage, false, true);
     }
     if (page > 0) {
         search_nav_l.classList.remove("hidden");
@@ -120,7 +121,7 @@ search_nav_r.addEventListener("click", (event) => {
     event.preventDefault();
     if (result_total > resultsPerPage * (page + 1)) {
         page++;
-        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage);
+        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage, false, true);
     }
     if (page > 0) {
         search_nav_l.classList.remove("hidden");
@@ -149,6 +150,10 @@ searchButton.addEventListener("click", async (event) => {
         search_nav_r.classList.remove("hidden");
 
         //update the results page with the new search results
-        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage);
+        result_total = updateResultsPage(contentBoxSearch, storedResults, page, resultsPerPage, false, true);
     }
 });
+
+// code for timeline management
+let timeline = new TimeLine(0,0,[]);
+
