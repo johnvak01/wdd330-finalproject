@@ -2,6 +2,7 @@
 export function updateResultsPage(contentBox, searchResults, page = 0, resultsPerPage = 3) {
     contentBox.innerHTML = "";
     let totalboxes = 0;
+    let displayedboxes = 0;
     searchResults.forEach((media) => {
         // make the Box
         const mediaBox = createMediaBox(media.id, media.type, media.title, media.description, media.posterPath, media.runtime, media.releaseDate, media.producers, media.genres);
@@ -11,12 +12,20 @@ export function updateResultsPage(contentBox, searchResults, page = 0, resultsPe
         if(totalboxes <= resultsPerPage*(page+1) && totalboxes > resultsPerPage*page) {
             console.log("displaying box", mediaBox.dataset.id);
             mediaBox.classList.remove('undisplayed');
+            displayedboxes++;
         }
         // append box
         contentBox.appendChild(mediaBox);
-        
-
     });
+    while(displayedboxes < resultsPerPage) {
+        const placeholderBox = CreateEmptyMediaBox("No more results");
+        contentBox.appendChild(placeholderBox);
+        displayedboxes++;
+        console.log("+")
+        
+    }
+    // update pagination
+    return totalboxes;
 }
 
 
@@ -25,9 +34,6 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     mediaBox.classList.add('media-box',"undisplayed");
     mediaBox.dataset.id = id;
     mediaBox.dataset.type = type;
-
-    const cardContents = document.createElement('div');
-    cardContents.classList.add('card-contents');
 
     const w_add = document.createElement('div');
     const w_remove = document.createElement('div');
@@ -38,7 +44,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     w_remove.textContent = '-';
 
 
-    const el_title = document.createElement('h1');
+    const el_title = document.createElement('h2');
     el_title.textContent = title;
     el_title.classList.add('media-title');
     const el_description = document.createElement('p');
@@ -51,6 +57,8 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     else if(type === 'movie') {
         el_poster_path.src = `https://image.tmdb.org/t/p/w500/${posterPath}`;
     }
+    el_poster_path.classList.add('media-image');
+    // el_poster_path.style.width = '250px';
     el_poster_path.alt = `${title} poster`;
     el_poster_path.classList.add('media-image');
     const el_runtime = document.createElement('p');
@@ -67,6 +75,19 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     el_genres.classList.add('media-genres');
 
     mediaBox.append(w_add, el_title, w_remove, el_description, el_poster_path, el_runtime, el_release_date, el_producers, el_genres);
+
+    return mediaBox;
+}
+
+function CreateEmptyMediaBox(placeholderText = "") {
+    const mediaBox = document.createElement('div');
+    mediaBox.classList.add('media-box','media-box-placeholder', "placeholder");
+    mediaBox.dataset.type = "placeholder";
+
+    const text = document.createElement('span');
+    text.textContent = placeholderText;
+
+    mediaBox.append(text);
 
     return mediaBox;
 }

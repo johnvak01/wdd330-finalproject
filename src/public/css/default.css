@@ -111,6 +111,8 @@ footer {
     width: 100%;
     margin-bottom: 0.25rem;
     background-color: var(--light);
+    overflow-wrap: break-word;
+    word-break: normal;
 }
 
 .media-list {
@@ -124,7 +126,9 @@ footer {
     grid-row: 1 / -1;
     justify-content: center;
     align-content: center;
-
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .media-nav-r {
@@ -132,6 +136,9 @@ footer {
     grid-row: 1 / -1;
     justify-content: center;
     align-content: center;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .media-nav-l:hover,
@@ -185,10 +192,14 @@ footer {
 .media-description,
 .media-duration {
     width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: 0.25rem;
     grid-column: 1 / -1;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
+
 
 .remove {
     border: 3px solid var(--accent-1);
@@ -236,9 +247,10 @@ input[type="email"],
 textarea {
     width: 60%;
     padding: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.5rem auto;
     border: 1px solid var(--dark);
     border-radius: 0.25rem;
+
 }
 
 button {
@@ -362,4 +374,7 @@ button:active {
 
 .undisplayed{
     display: none;
+}
+.hidden{
+    visibility: hidden;
 }
