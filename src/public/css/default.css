@@ -378,3 +378,13 @@ button:active {
 .hidden{
     visibility: hidden;
 }
+
+.media-handle{
+    cursor: grab;
+}
+.media-handle:active{
+    cursor: grabbing;
+}
+.dragging{
+    opacity: 0.5;
+}

@@ -3,7 +3,7 @@ import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 
 
 
-export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPage = 3) {
+export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPage = 3, draggable = false) {
     contentBox.innerHTML = "";
     let totalboxes = 0;
     let displayedboxes = 0;
@@ -17,6 +17,17 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
             console.log("displaying box", mediaBox.dataset.id);
             mediaBox.classList.remove('undisplayed');
             displayedboxes++;
+        }
+        //make draggable of toggled to yes
+        if (draggable) { 
+            const handle = mediaBox.querySelector('.media-handle')
+            handle.classList.remove('undisplayed');
+            handle.addEventListener('mousedown', (event) => {
+                mediaBox.setAttribute('draggable', true);
+            });
+            handle.addEventListener('mouseup', (event) => {
+                mediaBox.setAttribute('draggable', false);
+            });
         }
         // append box
         contentBox.appendChild(mediaBox);
@@ -36,6 +47,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
 function createMediaBox(id, type, title, description, posterPath, runtime, releaseDate, producers, genres) {
     const mediaBox = document.createElement('div');
     mediaBox.classList.add('media-box', "undisplayed");
+    
     mediaBox.dataset.id = id;
     mediaBox.dataset.type = type;
 
@@ -88,7 +100,10 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
         w_remove.classList.add('undisplayed');
     });
 
-
+    const el_handle = document.createElement('div');
+    el_handle.classList.add('media-handle', 'undisplayed');
+    el_handle.textContent = "☰";
+    el_handle.title = "Drag to reorder";
 
     const el_title = document.createElement('h2');
     el_title.textContent = title || "No title available";
@@ -120,7 +135,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     el_genres.textContent = genres || "unknown";
     el_genres.classList.add('media-genres');
 
-    mediaBox.append(w_add, w_remove, el_title, el_runtime, el_description, el_poster_path, el_release_date, el_producers, el_genres);
+    mediaBox.append(w_add, w_remove, el_title, el_handle, el_runtime, el_description, el_poster_path, el_release_date, el_producers, el_genres);
 
     return mediaBox;
 }
