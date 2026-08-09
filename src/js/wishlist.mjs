@@ -1,10 +1,7 @@
-import { getAPISearchResults } from "./search.mjs";
 import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 import { updateResultsPage } from "./media.mjs";
 
-// If there are stored results, you can use them to update the results page
 let storedWishlist = getLocalStorage("wishlist");
-
 let page = 0;
 const resultsPerPage = 9;
 let contentBox = document.getElementById("wishlist-boxes");
