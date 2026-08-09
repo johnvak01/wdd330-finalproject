@@ -6,27 +6,12 @@ import { updateResultsPage } from "./media.mjs";
 let storedResults = getLocalStorage("searchResults");
 console.log("stored results:", storedResults);
 
+let storedWishlist = getLocalStorage("wishlist");
+
 let page = 0;
 const resultsPerPage = 3;
 let contentBox = document.getElementById("search-results");
 let result_total = updateResultsPage(contentBox, storedResults, page, resultsPerPage);
-
-// code for the search functionality
-const searchButton = document.getElementById("search-button");
-const searchInput = document.getElementById("search-input");
-
-searchButton.addEventListener("click", async (event) => {
-    event.preventDefault();
-    const query = searchInput.value.trim();
-    if (query) {
-        storedResults = await getAPISearchResults(query);
-        setLocalStorage("searchResults", storedResults);
-        page = 0;
-        //update the results page with the new search results
-        result_total = updateResultsPage(contentBox, searchResults, page, resultsPerPage);
-    }
-});
-
 // pagination
 
 const search_nav_l = document.getElementById("search-nav-l");
@@ -86,3 +71,22 @@ search_nav_r.addEventListener("click", (event) => {
         search_nav_r.classList.add("hidden");
     }
 });
+// code for the search functionality
+const searchButton = document.getElementById("search-button");
+const searchInput = document.getElementById("search-input");
+
+searchButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const query = searchInput.value.trim();
+    if (query) {
+        storedResults = await getAPISearchResults(query);
+        setLocalStorage("searchResults", storedResults);
+        page = 0;
+        search_nav_l.classList.add("hidden");
+        search_nav_r.classList.remove("hidden");
+
+        //update the results page with the new search results
+        result_total = updateResultsPage(contentBox, storedResults, page, resultsPerPage);
+    }
+});
+

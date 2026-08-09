@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/default.css">
     <script src="../js/default.mjs" type="module" defer></script>
+    <script src="../js/wishlist.mjs" type="module" defer></script>
 </head>
 
 <body>
@@ -21,9 +22,9 @@
             <h1>Manage Your Wishlist</h1>
         </div>
         <div class="content-box media-list">
-            <div class="media-nav-l">&lt;</div>
-            <div class="media-nav-r">&gt;</div>
-            <div class="media-boxes">
+            <div class="media-nav-l" id="wishlist-nav-l">&lt;</div>
+            <div class="media-nav-r" id="wishlist-nav-r">&gt;</div>
+            <div class="media-boxes" id="wishlist-boxes">
                 <div class="media-box">
                     <div class="wishlist-modify add">+</div>
                     <h1 class="media-title">Box 1</h1>

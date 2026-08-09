@@ -1,25 +1,73 @@
+import { getAPISearchResults } from "./search.mjs";
 import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 import { updateResultsPage } from "./media.mjs";
 
 // If there are stored results, you can use them to update the results page
-let storedResults = getLocalStorage("searchResults");
-console.log("stored results:", storedResults);
+let storedWishlist = getLocalStorage("wishlist");
 
-let contentBox = document.getElementById("search-results");
+let page = 0;
+const resultsPerPage = 9;
+let contentBox = document.getElementById("wishlist-boxes");
+let result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage);
+// pagination
 
-updateResultsPage(contentBox, storedResults);
+const search_nav_l = document.getElementById("wishlist-nav-l");
+const search_nav_r = document.getElementById("wishlist-nav-r");
 
-// code for the search functionality
-const searchButton = document.getElementById("search-button");
-const searchInput = document.getElementById("search-input");
+search_nav_l.classList.add("hidden");
+search_nav_r.classList.add("hidden");
 
-searchButton.addEventListener("click", async (event) => {
+if (page > 0) {
+    search_nav_l.classList.remove("hidden");
+}
+else {
+    search_nav_l.classList.add("hidden");
+}
+if (result_total > resultsPerPage * (page + 1)) {
+    search_nav_r.classList.remove("hidden");
+} else {
+    search_nav_r.classList.add("hidden");
+}
+
+search_nav_l.addEventListener("click", (event) => {
     event.preventDefault();
-    const query = searchInput.value.trim();
-    if (query) {
-        let searchResults = await getAPISearchResults(query);
-        setLocalStorage("searchResults", searchResults);
-        //update the results page with the new search results
-        updateResultsPage(contentBox, searchResults);
+    if (page > 0) {
+        page--;
+        console.log("prior page", page);
+        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage);
+    }
+    if (page > 0) {
+        search_nav_l.classList.remove("hidden");
+    }
+    else {
+        search_nav_l.classList.add("hidden");
+    }
+    if (result_total > resultsPerPage * (page + 1)) {
+        search_nav_r.classList.remove("hidden");
+    } else {
+        search_nav_r.classList.add("hidden");
     }
 });
+
+search_nav_r.addEventListener("click", (event) => {
+    console.log("next page", page);
+    event.preventDefault();
+    if (result_total > resultsPerPage * (page + 1)) {
+        page++;
+        result_total = updateResultsPage(contentBox, storedWishlist, page, resultsPerPage);
+    }
+    if (page > 0) {
+        search_nav_l.classList.remove("hidden");
+    }
+    else {
+        search_nav_l.classList.add("hidden");
+    }
+    if (result_total > resultsPerPage * (page + 1)) {
+        search_nav_r.classList.remove("hidden");
+    } else {
+        search_nav_r.classList.add("hidden");
+    }
+});
+
+
+
