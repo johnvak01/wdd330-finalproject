@@ -9,9 +9,7 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
         const mediaBox = createMediaBox(media.id, media.type, media.title, media.description, media.posterPath, media.runtime, media.releaseDate, media.producers, media.genres);
         //deisplay box if in range 
         totalboxes++;
-        console.log("page", page, "resultsPerPage", resultsPerPage, "totalboxes", totalboxes);
         if (totalboxes <= resultsPerPage * (page + 1) && totalboxes > resultsPerPage * page) {
-            console.log("displaying box", mediaBox.dataset.id);
             mediaBox.classList.remove('undisplayed');
             displayedboxes++;
         }
@@ -27,22 +25,18 @@ export function updateResultsPage(contentBox, mediaList, page = 0, resultsPerPag
             });
         }
         if (itinerary) {
-            console.log("itinerary mode");
             const w_add = mediaBox.querySelector('.watchlist-modify.add');
             const w_remove = mediaBox.querySelector('.watchlist-modify.remove');
             w_add.classList.add('undisplayed');
             w_remove.classList.add('undisplayed');
 
             let currentItinerary = getLocalStorage("itinerary") || [];
-            console.log(currentItinerary.some(item => item.id === mediaBox.dataset.id));
-            if (currentItinerary.some(item => item.id === mediaBox.dataset.id)) {
+            if (currentItinerary.some(item => item.id == mediaBox.dataset.id)) {
                 const i_remove = mediaBox.querySelector('.itin-modify.remove');
                 i_remove.classList.remove('undisplayed');
-                console.log("itinerary mode, item IS in itinerary");
             } else {
                 const i_add = mediaBox.querySelector('.itin-modify.add');
                 i_add.classList.remove('undisplayed');
-                console.log("itinerary mode, item NOT in itinerary");
 
             }
 
@@ -130,6 +124,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     i_add.addEventListener('click', (event) => {
         event.preventDefault;
         let currentItinerary = getLocalStorage("itinerary") || [];
+        console.log(currentItinerary);
         if (!currentItinerary.some(item => item.id === id)) {
 
             currentItinerary.push(
