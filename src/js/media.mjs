@@ -179,6 +179,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     }
     el_poster_path.classList.add('media-image');
     // el_poster_path.style.width = '250px';
+    el_poster_path.setAttribute("loading", 'lazy');
     el_poster_path.alt = `${title || "missing"} poster`;
     el_poster_path.classList.add('media-image');
     const el_runtime = document.createElement('p');
