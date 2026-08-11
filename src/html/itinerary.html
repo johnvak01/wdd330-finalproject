@@ -21,7 +21,7 @@
         <div class="content-box">
             <h1>Construct Your Itinerary</h1>
         </div>
-        <div class="content-box itinerary-box">
+        <div class="content-box itinerary-box" id="timeline-box">
             <div class="itinerary-start">START</div>
             <div class="itinerary-line">
                 <span class="itinerary-section i-empty">Spirited Away</span>
@@ -31,6 +31,10 @@
                 <span class="itinerary-section i-excess">True Grit</span>
             </div>
             <div class="itinerary-end">END: 000 Minutes</div>
+
+        </div>
+
+        <div class="content-box itinerary-box">
             <div class="itinerary-list" id="itinerary-list">
                 <h2>Itinerary Order</h2>
                 <ul>
@@ -41,12 +45,13 @@
                     <li class="placeholder">a</li>
                 </ul>
             </div>
-            <div class="itinerary-buttons">
-                <button type="button" class="add" id="add-break">Add Break</button>
-                <button type="button" class="remove" id="remove-break">Remove Break</button>
-                <button type="button" class="add" id="adjust-time">Adjust Time</button>
-                <button type="button" class="add" id="suggest-media">Suggest Media</button>
-            </div>
+        </div>
+        <div class="itinerary-buttons">
+            <button type="button" class="add" id="add-break">Add Break (10min)</button>
+            <button type="button" class="remove" id="remove-break">Remove Break</button>
+            <button type="button" class="add" id="adjust-time+10">+10 Minutes</button>
+            <button type="button" class="add" id="adjust-time-10">-10 Minutes</button>
+            <button type="button" class="add" id="suggest-media">Suggest Media</button>
         </div>
         <div class="content-box">
             <h1>Add From Wishlist</h1>

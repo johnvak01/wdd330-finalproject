@@ -75,6 +75,7 @@ export class ItineraryList {
         let lastIndex = this.itineraryList.findLastIndex(item => item.type == value);
         if (lastIndex != -1) {
             this.itineraryList.splice(lastIndex, 1);
+            this.pushItineraryList();
             return true;
         }
         return false;

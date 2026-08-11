@@ -2,7 +2,7 @@ import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 import { updateResultsPage } from "./media.mjs";
 import { getAPISearchResults } from "./search.mjs";
 import { TimeLine, ItineraryList } from "./timeline.mjs";
-
+import { TimelineVis } from "./timeline-vis.mjs";
 
 // Wishlist Update
 let storedWishlist = getLocalStorage("wishlist");
@@ -163,6 +163,9 @@ const itineraryBox = document.getElementById("itinerary-list");
 let currentItinerary = new ItineraryList(itineraryBox);
 currentItinerary.updateItineraryBox();
 let timeline = new TimeLine(1, 1, currentItinerary.getItineraryList());
+const timelineContainer = document.getElementById("timeline-box");
+let timelineVis = new TimelineVis(0,10,timelineContainer, currentItinerary.getItineraryList());
+timelineVis.refreshTimelineContainer();
 
 document.addEventListener("itineraryAdd", (e) => {
     console.log("caught the event", e.detail);
@@ -170,6 +173,7 @@ document.addEventListener("itineraryAdd", (e) => {
     currentItinerary.updateItineraryBox();
     timeline.updateTimelineEvents(currentItinerary.getItineraryList());
     console.log(timeline.getTimeline());
+    timelineVis.putEvents(currentItinerary.getItineraryList());
 });
 
 document.addEventListener("itineraryRemove", (e) => {
@@ -178,12 +182,14 @@ document.addEventListener("itineraryRemove", (e) => {
     currentItinerary.updateItineraryBox();
     timeline.updateTimelineEvents(currentItinerary.getItineraryList());
     console.log(timeline.getTimeline());
+    timelineVis.putEvents(currentItinerary.getItineraryList());
 
 });
 
 const addBreakButton = document.getElementById("add-break");
 const removeBreakButton = document.getElementById("remove-break");
-const adjustTimeButton = document.getElementById("adjust-time");
+const plusTimeButton = document.getElementById("adjust-time+10");
+const minusTimeButton = document.getElementById("adjust-time-10");
 const suggestMediaButton = document.getElementById("suggest-media");
 
 addBreakButton.addEventListener("click", e=>{
@@ -191,21 +197,29 @@ addBreakButton.addEventListener("click", e=>{
     let breakData = {
         id: 0,
         type: "break",
-        title: "Break"
+        title: "Break",
+        runtime: 10
     }
     currentItinerary.updateItineraryListRAW(breakData);
     currentItinerary.updateItineraryBox();
+    timelineVis.putEvents(currentItinerary.getItineraryList());
 });
 removeBreakButton.addEventListener("click", e=>{
     e.preventDefault();
     currentItinerary.popItineraryList("break");
     currentItinerary.updateItineraryBox();
+    timelineVis.putEvents(currentItinerary.getItineraryList());
 
 });
-adjustTimeButton.addEventListener("click", e=>{
+plusTimeButton.addEventListener("click", e=>{
     e.preventDefault();
+    timelineVis.addTime(10);
 
 });
+minusTimeButton.addEventListener("click",e=>{
+    e.preventDefault();
+    timelineVis.removeTime(10);
+})
 suggestMediaButton.addEventListener("click", e=>{
     e.preventDefault();
 
