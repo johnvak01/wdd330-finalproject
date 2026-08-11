@@ -112,7 +112,17 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
         w_remove.classList.add('undisplayed');
     });
     // add itinerary buttons
-
+    let mediaObject = {
+        id: id,
+        type: type,
+        title: title,
+        description: description,
+        posterPath: posterPath,
+        runtime: runtime,
+        releaseDate: releaseDate,
+        producers: producers,
+        genres: genres
+    }
     const i_add = document.createElement('div');
     const i_remove = document.createElement('div');
 
@@ -120,29 +130,19 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
     i_add.textContent = '+';
     i_remove.classList.add('itin-modify', 'remove', 'undisplayed');
     i_remove.textContent = '-';
-
+    const eventItinAdd = new CustomEvent('itineraryAdd', {detail: mediaObject, add: true});
+    const eventItinRemove = new CustomEvent('itineraryRemove', {detail: mediaObject, add: false});
     i_add.addEventListener('click', (event) => {
         event.preventDefault;
         let currentItinerary = getLocalStorage("itinerary") || [];
         console.log(currentItinerary);
         if (!currentItinerary.some(item => item.id === id)) {
-
-            currentItinerary.push(
-                {
-                    id: id,
-                    type: type,
-                    title: title,
-                    description: description,
-                    posterPath: posterPath,
-                    runtime: runtime,
-                    releaseDate: releaseDate,
-                    producers: producers,
-                    genres: genres
-                }
-            );
+            currentItinerary.push(mediaObject);
             setLocalStorage("itinerary", currentItinerary);
             i_add.classList.add('undisplayed');
             i_remove.classList.remove('undisplayed');
+            document.dispatchEvent(eventItinAdd);
+
         }
     });
     i_remove.addEventListener('click', (event) => {
@@ -152,6 +152,7 @@ function createMediaBox(id, type, title, description, posterPath, runtime, relea
         setLocalStorage("itinerary", currentItinerary);
         i_add.classList.remove('undisplayed');
         i_remove.classList.add('undisplayed');
+        document.dispatchEvent(eventItinRemove);
     });
 
     const el_handle = document.createElement('div');

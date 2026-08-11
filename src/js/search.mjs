@@ -1,10 +1,6 @@
 
 import { searchPodcasts, searchMovies, getMovieDetails, getPodcastFeed, getPodcastDetails } from "./api.mjs";
 
-console.log(searchPodcasts("dog"))
-console.log(searchMovies("dog"))
-console.log(getMovieDetails(200))
-console.log(getPodcastDetails(2000))
 
 export async function getAPISearchResults(query) {
     console.log("searching for", query);

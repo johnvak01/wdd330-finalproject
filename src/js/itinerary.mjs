@@ -1,7 +1,7 @@
 import { setLocalStorage, getLocalStorage } from "./storage.mjs";
 import { updateResultsPage } from "./media.mjs";
 import { getAPISearchResults } from "./search.mjs";
-import { TimeLine } from "./timeline.mjs";
+import { TimeLine, ItineraryList } from "./timeline.mjs";
 
 
 // Wishlist Update
@@ -34,7 +34,7 @@ wishlist_nav_l.addEventListener("click", (event) => {
     event.preventDefault();
     if (pageWishlist > 0) {
         pageWishlist--;
-        result_total = updateResultsPage(contentBox, storedWishlist, pageWishlist, resultsPerPageWishlist, false,true);
+        result_total = updateResultsPage(contentBox, storedWishlist, pageWishlist, resultsPerPageWishlist, false, true);
         setDraggable(document.querySelectorAll('.media-box'));
     }
     if (pageWishlist > 0) {
@@ -54,7 +54,7 @@ wishlist_nav_r.addEventListener("click", (event) => {
     event.preventDefault();
     if (result_total > resultsPerPageWishlist * (pageWishlist + 1)) {
         pageWishlist++;
-        result_total = updateResultsPage(contentBox, storedWishlist, pageWishlist, resultsPerPageWishlist, false,true);
+        result_total = updateResultsPage(contentBox, storedWishlist, pageWishlist, resultsPerPageWishlist, false, true);
         // setDraggable(document.querySelectorAll('.media-box'));
     }
     if (pageWishlist > 0) {
@@ -71,7 +71,6 @@ wishlist_nav_r.addEventListener("click", (event) => {
 });
 // Search Update
 let storedResults = getLocalStorage("searchResults");
-console.log("stored results:", storedResults);
 
 let pageSearch = 0;
 let resultsPerPageSearch = 3;
@@ -158,5 +157,26 @@ searchButton.addEventListener("click", async (event) => {
 });
 
 // code for timeline management
-let timeline = new TimeLine(0,0,[]);
 
+// code for itinerary management
+const itineraryBox = document.getElementById("itinerary-list");
+let currentItinerary = new ItineraryList(itineraryBox);
+currentItinerary.updateItineraryBox();
+let timeline = new TimeLine(1, 1, currentItinerary.getItineraryList());
+
+document.addEventListener("itineraryAdd", (e) => {
+    console.log("caught the event", e.detail);
+    currentItinerary.updateItineraryList(e.detail, e.add);
+    currentItinerary.updateItineraryBox();
+    timeline.updateTimelineEvents(currentItinerary.getItineraryList());
+    console.log(timeline.getTimeline());
+});
+
+document.addEventListener("itineraryRemove", (e) => {
+    console.log("caught the event", e.detail);
+    currentItinerary.updateItineraryList(e.detail, e.add);
+    currentItinerary.updateItineraryBox();
+    timeline.updateTimelineEvents(currentItinerary.getItineraryList());
+    console.log(timeline.getTimeline());
+
+});
