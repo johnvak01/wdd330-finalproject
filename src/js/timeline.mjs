@@ -66,6 +66,20 @@ export class ItineraryList {
         }
         this.pushItineraryList();
     }
+    updateItineraryListRAW(newItem) {
+        this.itineraryList.push(newItem);
+        this.pushItineraryList();
+    }
+    popItineraryList(value) {
+        this.itineraryList
+        let lastIndex = this.itineraryList.findLastIndex(item => item.type == value);
+        if (lastIndex != -1) {
+            this.itineraryList.splice(lastIndex, 1);
+            return true;
+        }
+        return false;
+    }
+
     updateItineraryBox() {
         this.itineraryListBox.innerHTML = "";
         let title = document.createElement("h2");

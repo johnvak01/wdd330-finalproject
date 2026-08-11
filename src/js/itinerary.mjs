@@ -180,3 +180,33 @@ document.addEventListener("itineraryRemove", (e) => {
     console.log(timeline.getTimeline());
 
 });
+
+const addBreakButton = document.getElementById("add-break");
+const removeBreakButton = document.getElementById("remove-break");
+const adjustTimeButton = document.getElementById("adjust-time");
+const suggestMediaButton = document.getElementById("suggest-media");
+
+addBreakButton.addEventListener("click", e=>{
+    e.preventDefault();
+    let breakData = {
+        id: 0,
+        type: "break",
+        title: "Break"
+    }
+    currentItinerary.updateItineraryListRAW(breakData);
+    currentItinerary.updateItineraryBox();
+});
+removeBreakButton.addEventListener("click", e=>{
+    e.preventDefault();
+    currentItinerary.popItineraryList("break");
+    currentItinerary.updateItineraryBox();
+
+});
+adjustTimeButton.addEventListener("click", e=>{
+    e.preventDefault();
+
+});
+suggestMediaButton.addEventListener("click", e=>{
+    e.preventDefault();
+
+});
