@@ -1,10 +1,19 @@
+import { getLocalStorage } from "./storage.mjs";
 export class TimelineVis {
     constructor(startTime = 0, endTime = 0, container, events = []) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.tripDuration = endTime - startTime;
+        if (startTime == 0 && endTime == 0) {
+            let currentTimeline = getLocalStorage("timeline");
+            this.startTime = currentTimeline.timeline.startTime;
+            this.endTime = currentTimeline.timeline.endTime;
+            this.events = currentTimeline.timeline.events;
+        } else {
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.events = events;
+        }
+        this.tripDuration = this.endTime - this.startTime;
         this.container = container;
-        this.events = events;
+
     }
     addEvent(event) {
         this.events.push(event);
@@ -113,6 +122,7 @@ export class TimelineVis {
         this.tripDuration += time;
         this.endTime += time;
         this.refreshTimelineContainer();
+        console.log(this.tripDuration);
     }
     removeTime(time) {
         if (this.tripDuration - time < 0) {
@@ -123,6 +133,7 @@ export class TimelineVis {
             this.tripDuration -= time;
         }
         this.refreshTimelineContainer();
+        console.log(this.tripDuration);
     }
 
 }

@@ -162,9 +162,9 @@ searchButton.addEventListener("click", async (event) => {
 const itineraryBox = document.getElementById("itinerary-list");
 let currentItinerary = new ItineraryList(itineraryBox);
 currentItinerary.updateItineraryBox();
-let timeline = new TimeLine(1, 1, currentItinerary.getItineraryList());
+let timeline = new TimeLine(0, 0, currentItinerary.getItineraryList());
 const timelineContainer = document.getElementById("timeline-box");
-let timelineVis = new TimelineVis(0,10,timelineContainer, currentItinerary.getItineraryList());
+let timelineVis = new TimelineVis(0,0,timelineContainer, currentItinerary.getItineraryList());
 timelineVis.refreshTimelineContainer();
 
 document.addEventListener("itineraryAdd", (e) => {
@@ -213,12 +213,15 @@ removeBreakButton.addEventListener("click", e=>{
 });
 plusTimeButton.addEventListener("click", e=>{
     e.preventDefault();
+    timeline.updateTimeline(10);
     timelineVis.addTime(10);
 
 });
 minusTimeButton.addEventListener("click",e=>{
     e.preventDefault();
+    timeline.updateTimeline(-10);
     timelineVis.removeTime(10);
+
 })
 suggestMediaButton.addEventListener("click", e=>{
     e.preventDefault();

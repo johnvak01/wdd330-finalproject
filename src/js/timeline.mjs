@@ -3,22 +3,46 @@ import { addDraggableEvent, setDraggable } from "./draggable.mjs";
 
 export class TimeLine {
     constructor(startTime = 0, endTime = 0, events = []) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.timelineEvents = events;
-
         this.timeline = getLocalStorage("timeline");
+
+
         if (this.timeline.length == 0) {
+            this.timelineEvents = events;
+            this.startTime = startTime;
+            this.endTime = endTime;
             this.timeline = { timeline: { startTime: this.startTime, endTime: this.endTime, events: this.timelineEvents } };
+        }
+        else {
+            if (startTime == 0 && endTime == 0) {
+                this.startTime = this.timeline.timeline.startTime;
+                this.endTime = this.timeline.timeline.endTime;
+            } else {
+                this.startTime = startTime;
+                this.endTime = endTime;
+            }
+            if (this.timeline.timeline.timelineEvents) {
+                this.timelineEvents = events;
+            }else{
+                this.timelineEvents = this.timeline.timeline.timelineEvents;
+            }
         }
         setLocalStorage("timeline", this.timeline);
     }
     storeTimeline() {
         setLocalStorage("timeline", this.timeline);
     }
-    updateTimeline(startTime, endTime) {
+    updateTimeline(increment = 10, startTime = this.startTime, endTime = this.endTime) {
+
         this.startTime = startTime;
         this.endTime = endTime;
+        console.log(this.endTime + increment, " ", this.startTime);
+        if (this.endTime + increment <= this.startTime) {
+            this.endTime = this.startTime;
+        } else {
+            this.endTime += increment;
+        }
+        this.timeline.timeline.startTime = this.startTime;
+        this.timeline.timeline.endTime = this.endTime;
         this.storeTimeline();
     }
     resetTimeline(startTime, endTime) {
