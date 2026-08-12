@@ -76,6 +76,7 @@ const searchButton = document.getElementById("search-button");
 const searchInput = document.getElementById("search-input");
 
 searchButton.addEventListener("click", async (event) => {
+    searchButton.classList.add("search-throbber");
     event.preventDefault();
     const query = searchInput.value.trim();
     if (query) {
@@ -88,5 +89,6 @@ searchButton.addEventListener("click", async (event) => {
         //update the results page with the new search results
         result_total = updateResultsPage(contentBox, storedResults, page, resultsPerPage);
     }
+    searchButton.classList.remove("search-throbber")
 });
 

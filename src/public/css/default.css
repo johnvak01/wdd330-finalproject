@@ -147,6 +147,7 @@ footer {
     color: var(--light);
     border-radius: 0.25rem;
     cursor: pointer;
+    transition: color 1s ease, background-color 1s ease;
 }
 
 .media-nav-l:active,
@@ -174,6 +175,11 @@ footer {
     grid-template-columns: 15% 60% 15%;
     align-items: center;
     justify-content: center;
+    transition: transform 3s ease;
+}
+.media-box:not(.undisplayed){
+    transform: scale(1), translateX(0px);
+
 }
 
 .placeholder {
@@ -190,7 +196,10 @@ footer {
 
 .media-image,
 .media-description,
-.media-duration, .media-producers,.media-genres, .media-release-date{
+.media-duration,
+.media-producers,
+.media-genres,
+.media-release-date {
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -270,6 +279,9 @@ button:hover {
 button:active {
     background-color: var(--dark);
     color: var(--light);
+    transform: translate(0,-3px);
+    transition: transform 0.1s ease-in-out;
+
 }
 
 .itinerary-box {
@@ -328,7 +340,8 @@ button:active {
     border-radius: 0 0.25rem 0.25rem 0;
     color: var(--light);
 }
-.i-placeholder{
+
+.i-placeholder {
     border: dashed 1px var(--accent-2);
 }
 
@@ -353,15 +366,15 @@ button:active {
 
     cursor: pointer;
     filter: drop-shadow(2px 0.25rem 0 var(--dark));
-    /* transition: transform 3s forward; */
-    /* transition: filter 0.6s forward; */
+    transition: transform 0.6s ease, filter 0.6s ease, background-color 0.6s ease;
 }
+
 .itinerary-list li:active {
     background-color: var(--dark);
     color: var(--light);
 }
 
-.itinerary-buttons{
+.itinerary-buttons {
     grid-column: 1 / -1;
     display: flex;
     flex-direction: row;
@@ -369,26 +382,52 @@ button:active {
     width: 100%;
     margin: 0.25rem;
 }
-.itinerary-buttons button{
+
+.itinerary-buttons button {
     width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.undisplayed{
+.undisplayed {
     display: none;
+    transform: translateX(100px);
 }
-.hidden{
+
+.hidden {
     visibility: hidden;
 }
 
-.media-handle{
+.media-handle {
     cursor: grab;
 }
-.media-handle:active{
+
+.media-handle:active {
     cursor: grabbing;
 }
-.dragging{
+
+.dragging {
     opacity: 0.5;
+    transform: scale(0.95);
+    transition: transform 3s ease-in-out;
+}
+
+/* css animation */
+.search-throbber {
+    animation: pulse 1s linear infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }

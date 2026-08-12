@@ -143,6 +143,7 @@ const searchInput = document.getElementById("search-input");
 
 searchButton.addEventListener("click", async (event) => {
     event.preventDefault();
+    searchButton.classList.add("search-throbber");
     const query = searchInput.value.trim();
     if (query) {
         storedResults = await getAPISearchResults(query);
@@ -154,6 +155,7 @@ searchButton.addEventListener("click", async (event) => {
         //update the results page with the new search results
         result_total = updateResultsPage(contentBoxSearch, storedResults, pageSearch, resultsPerPageSearch, false, true);
     }
+    searchButton.classList.remove("search-throbber")
 });
 
 // code for timeline management
@@ -223,7 +225,7 @@ minusTimeButton.addEventListener("click",e=>{
     timelineVis.removeTime(10);
 
 })
-suggestMediaButton.addEventListener("click", e=>{
-    e.preventDefault();
+// suggestMediaButton.addEventListener("click", e=>{
+//     e.preventDefault();
 
-});
+// });
