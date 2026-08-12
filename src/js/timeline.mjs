@@ -5,7 +5,6 @@ export class TimeLine {
     constructor(startTime = 0, endTime = 0, events = []) {
         this.timeline = getLocalStorage("timeline");
 
-
         if (this.timeline.length == 0) {
             this.timelineEvents = events;
             this.startTime = startTime;

@@ -262,6 +262,11 @@ textarea {
 
 }
 
+input[type="text"]:focus{
+    transform: scale(1.01);
+    border-color: var(--accent-2);
+}
+
 button {
     padding: 0.5rem 1rem;
     margin: 0.5rem;
